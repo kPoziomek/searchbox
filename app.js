@@ -19,6 +19,7 @@ const clearInput = document.getElementById('clear-btn');
 const fillArray = (arr) => {
   arr.map((element) => {
     const arrItem = document.createElement('li');
+    arrItem.classList.add('test');
     arrItem.addEventListener('click', () => {
       arrItem.style.color = 'green';
     });
@@ -29,13 +30,17 @@ const fillArray = (arr) => {
 fillArray(arrayOfColors);
 
 const findColor = (e) => {
-  let finput = e.target.value;
+  let finput = e.target.value.toLowerCase();
 
-  const pageTitle = arrayOfColors.find((el) => el === finput);
-  if (pageTitle) {
-    document.title = pageTitle;
-  } else {
-    document.title = 'Search Box';
+  let testArr = document.querySelectorAll('.test');
+  for (let i = 0; i < testArr.length; i++) {
+    const element = testArr[i].textContent.toLowerCase();
+    if (element.includes(finput)) {
+      testArr[i].style.display = 'block';
+      document.title = finput;
+    } else {
+      testArr[i].style.display = 'none';
+    }
   }
 };
 
